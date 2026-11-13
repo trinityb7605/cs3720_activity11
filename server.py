@@ -1,6 +1,6 @@
 """
 	Steps to run the backend server:
-	1. Activate the virtual environment: venv\Scripts\activate
+	1. Activate the virtual environment: .venv\Scripts\activate
 	2. Run the server: uvicorn server:app --host 0.0.0.0 --port 8000 --reload
 	3. Access the API endpoints: http://localhost:8000/docs
 """
@@ -37,7 +37,7 @@ app.add_middleware(
 # --- Minimal Pydantic model ---
 class Sculpture(BaseModel):
 	name: str
-	price: float
+	artist: str
 	description: str
 	imageUrl: str
 
@@ -48,7 +48,7 @@ class SculptureValidated(BaseModel):
         extra="forbid"
     )
     name: str = Field(min_length=1)
-    price: float = Field(ge=0, allow_inf_nan=False)
+    artist: str = Field(min_length=1)
     description: str = Field(min_length=1)
     imageUrl: HttpUrl
 
